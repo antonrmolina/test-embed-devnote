@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head><title>Nucleus DevNote Embed Test</title></head>
+<body>
+  <h1>Third-party site (not b.next)</h1>
+  <p>Testing embed of a Nucleus DevNote below:</p>
+
+  <div id="devnote-embed"></div>
+
+  <script>
+    const url = 'https://antonrmolina.github.io/devnotes-ccby-2026/calpoly-purexpress-broccoli.json';
+
+    fetch(url)
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById('devnote-embed').innerHTML = `
+          <div style="border:1px solid #ccc; border-radius:8px; padding:16px; max-width:500px; font-family:sans-serif;">
+            <h3>${data.frontmatter?.title ?? 'Untitled'}</h3>
+            <p>${data.frontmatter?.description ?? ''}</p>
+            <a href="https://antonrmolina.github.io/devnotes-ccby-2026/calpoly-purexpress-broccoli">Read full DevNote →</a>
+          </div>
+        `;
+      })
+      .catch(err => {
+        document.getElementById('devnote-embed').innerText = 'Failed to load: ' + err;
+      });
+  </script>
+</body>
+</html>
